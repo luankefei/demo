@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas demo</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    
+
+    <script>
+    /**
+     * 此demo创建一个400 * 300的画布，随后绘制一个三角形，并将三角形平移到画布右下角
+     */
+    function validateBrowser() {
+
+        try {
+
+            var canvas = document.querySelector('#canvas')
+            var context = canvas.getContext('2d')
+
+            return { 'canvas': canvas, 'context': context }
+
+        } catch (e) {
+
+            document.getElementsByTagName('body')[0].innerHTML = 'html5 is not supported in your browser.'
+
+            return false
+        }        
+    }
+
+
+    function initCanvas(canvas) {
+
+        canvas.setAttribute('width', '400px')
+        canvas.setAttribute('height', '300px')
+        canvas.style.border = '1px solid red'
+    }
+
+    function initContext(context) {
+
+        context.lineWidth = 2
+        context.lineJoin = 'round'
+        context.strokeStyle = 'blue'
+        context.fillStyle = 'blue'
+    }
+
+    
+    function createTriangle(canvas, context) {
+
+        // 保存现有状态
+        context.save()
+
+        // 进行偏移
+        context.translate(300, 250)
+
+        context.beginPath()
+        context.moveTo(50, 0)
+        context.lineTo(100, 50)
+        context.lineTo(0, 50)
+        
+        // 闭合路径
+        context.closePath()
+
+        context.stroke()
+        context.fill()
+
+        // 恢复原有绘图状态
+        context.restore()
+    }
+
+
+    function init() {
+        
+        // 浏览器验证
+        var value = validateBrowser()
+
+        if (value) {
+
+            // 初始化画布
+            initCanvas(value.canvas)
+
+            // 初始化画笔
+            initContext(value.context)
+
+            // 绘制三角形
+            createTriangle(value.canvas, value.context)
+        }
+
+    }
+
+
+    window.addEventListener('load', init, true)
+
+    </script>
+
+</body>
+</html>
