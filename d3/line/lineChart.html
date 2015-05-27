@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基础条形图</title>
+</head>
+<body>
+    
+    <div id="chart"></div>
+
+    <script src="js/d3.v3.min.js"></script>
+    <script>
+
+    drawLineBar('#chart')
+
+
+    function drawLineBar(selector) {
+
+        // 示例数据
+        var dataset = [ 5, 10, 15, 20, 30, 50 ]
+        var width = 500,
+            height = 500
+
+        // 创建线性比例尺
+        var scale = d3.scale.linear()
+            .domain([0, d3.max(dataset)])
+            .range([0, height])
+
+        console.log(d3.max(dataset))
+
+        // 创建svg
+        var svg = d3.select(selector)
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height)
+
+        // 绘制条形图
+        svg.selectAll('rect')
+            .data(dataset)
+            .enter()
+            .append('rect')
+            .attr('width', '20px')
+            .attr('height', function(d, i) {
+
+                return scale(d)
+            })
+            .attr('y', function(d, i) {
+
+                return height - scale(d)
+            })
+            .attr('x', function(d, i) {
+
+                return i * (width / dataset.length)
+            })
+            .attr('fill', '#457eb4')
+
+        // 添加标签
+        // svg.selectAll('text')
+        //     .data(dataset)
+        //     .enter()
+        //     .append('text')
+        //     .text(function(d) {
+
+        //         return d
+        //     })
+        //     .attr('x', function(d, i) {
+
+        //         return i * (width / dataset.length) + 10
+        //     })
+        //     .attr('y', function(d, i) {
+
+        //         return height - scale(d) + 15
+
+        //     })
+        //     .attr('text-anchor', 'middle')
+        //     .attr('fill', 'white')
+    }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现一个jsonp，传入URL，callback和callbackname 三个参数</title>
+</head>
+<body>
+    
+    <a class="link" href="http://www.taobao.com">淘宝</a>
+    <a class="link" href="http://www.jd.com">京东</a>
+
+    <script>
+        
+
+    var link = document.getElementsByClassName('link')
+    var listener = function(event) {
+
+        var e = event || window.event
+        var href = e.target.getAttribute('href')
+
+        if (href.indexOf('.taobao.com') === -1) {
+
+            var c = confirm('确定离开吗')
+
+            if (c === false) {
+
+                e.preventDefault()
+                e.stopPropagation()
+            }
+        }
+    }
+
+    // 绑定事件
+    for (var i = 0, len = link.length; i < len; i++) {
+
+        link[i].addEventListener('click', listener, false)
+    }
+
+
+    
+
+    </script>
+</body>
+</html>

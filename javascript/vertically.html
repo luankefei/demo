@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vertically center</title>
+
+    <style>
+
+    #container {
+        width: 200px;
+        height: 300px;
+        border: 1px solid blue;
+    }
+
+    /*#container {
+        line-height: 300px;
+    }*/
+
+    /*#container > span {
+        display: block;
+        font-size: 20px;
+        line-height: 1.2;
+        margin-top: 138px;
+    }*/
+
+    /*#container > span {
+        position: relative;
+        top: 50%;
+    }*/
+
+    /*#container {
+        display: table-cell;
+        vertical-align: middle;
+    }*/
+    
+    #container {
+        position: relative;
+    }
+
+    #container > span {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <span>需要居中的元素</span>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现一个jsonp，传入URL，callback和callbackname 三个参数</title>
+</head>
+<body>
+    
+    <a id="link" href="www.taobao.com">淘宝</a>
+
+    <script>
+    
+    var index = {
+
+        doSomething: function() {
+            console.log('ok')
+        },
+
+        jsonp: function(url, callbackName, callback) {
+
+            var script = document.createElement('script')
+            var body = document.querySelecotor('body')
+
+            script.src = url + '?type=jsonp&callbackName=' + callbackName
+            script.id = 'jsonp'
+            script.onload = callback
+
+            window[callbackName] = index.doSomething
+
+            body.appendChild(script)
+        }
+    }
+
+    index.jsonp('http://www.sunken.me/content', 'doSomething', function(name, script) {
+        delete window[name]
+        script.parentNode.removeChild(script)
+    })
+
+    </script>
+</body>
+</html>

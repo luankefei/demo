@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现一个timer，只暴露start、stop和reset方法</title>
+</head>
+<body>
+
+    <script>
+
+    function timer() {
+
+        var second = 0
+        var loop = null
+
+        var clear = function() {
+
+            if (loop !== null) {
+
+                clearInterval(loop)
+                loop = null
+            }
+        }
+
+        this.start = function() {
+
+            loop = setInterval(function() {
+
+                console.log(second)
+                ++second
+
+            }, 1000)
+        }
+
+        this.stop = function() {
+            
+            clear()
+            loop = null
+        }
+
+        this.reset = function() {
+
+            second = 0
+            clear()
+        }
+    }
+    
+    var t = new timer()
+    t.start()
+
+    setTimeout(function() {
+        t.stop()
+
+    }, 5000)
+
+
+    </script>
+</body>
+</html>
