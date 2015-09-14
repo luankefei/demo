@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单例模式</title>
+</head>
+<body>
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+var Person = function() {
+
+    this.name = '匿名'
+}
+
+var person = {
+
+    instance: null,
+    create: function() {
+
+        if (this.instance === null) {
+
+            this.instance = new Person()
+        }
+
+        return this.instance
+    }
+}
+
+var p1 = person.create()
+var p2 = person.create()
+
+p1.name = '取消匿名'
+
+console.log(p1.name)
+console.log(p2.name)
+console.log(p1 === p2)
+
+
+
+
+
+
+
+
+
+
+
+var Singleton = {}
+
+Singleton.getInstance = (function() {
+
+    var instance = null
+
+    return function(name) {
+
+        if (!instance) {
+
+            instance = new Singleton(name)
+        }
+
+        return instance
+    }
+
+})()
+
+</script>

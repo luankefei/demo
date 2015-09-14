@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多态</title>
+</head>
+<body>
+    
+
+<script>
+
+    var googleMap = {
+
+        show: function() {
+
+            console.log('开始渲染google地图')
+        }
+    }
+
+    var baiduMap = {
+
+        show: function() {
+
+            console.log('开始渲染baidu地图')
+        }
+    }
+
+    var renderMap = function(map) {
+
+        if (map.show instanceof Function) {
+
+            map.show()
+        }
+    }
+
+    renderMap(googleMap)
+    renderMap(baiduMap)
+
+</script>
+
+</body>
+</html>
