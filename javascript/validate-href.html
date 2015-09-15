@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点击页面上的连接，确认是否在baidu域下</title>
+</head>
+<body>
+    
+    <a href="http://baidu.com">真百度</a>
+    <a href="http://taobao.com/baidu.com">假百度</a>
+
+
+
+    <script>
+
+    var domain = 'baidu'
+
+    document.addEventListener('click', function(e) {
+
+        // 如果点击了链接，验证href
+        if (e.target.nodeName === 'A') {
+
+            var url = e.target.getAttribute('href')
+            var state = validateHref(url)
+
+            // 阻止跳转，弹窗提示
+            if (!state) {
+
+                var answer = confirm('你将离开' + domain + '，是否确认？')
+
+                if (answer) {
+
+                    location.href = url
+                }
+
+                e.preventDefault()
+            }
+        }
+
+    }, false)
+
+
+    function validateHref(url) {
+
+        // 首先截取掉头部的http或https
+        url = url.indexOf('http://') === 0 
+            ? url.substring(7)
+            : url.substring(8)
+
+        // 判断有无www开头
+        return url.split('.')[0] === domain
+    }
+
+
+
+    </script>
+
+
+
+
+
+    
+</body>
+</html>
